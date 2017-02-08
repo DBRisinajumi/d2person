@@ -272,9 +272,13 @@ class PprsPerson extends BasePprsPerson
         return $profile->user_id;
     }
 
-    public static function getAllPersonsForList(){
+    public static function getAllPersonsForList($active = false){
+        $where = '';
+        if($active){
+            $where = " AND pprs_status = '".self::PPRS_STATUS_ACTIVE."'";
+        }
         $sql = " 
-            SELECT 
+            SELECT DISTINCT
               `pprs_id`,
               CONCAT(
                 `pprs_second_name`,
@@ -282,11 +286,14 @@ class PprsPerson extends BasePprsPerson
                 `pprs_first_name`
               ) itemLabel 
             FROM
-              `pprs_person` 
+              `pprs_person`
+              INNER JOIN ccuc_user_company ON pprs_id = ccuc_person_id
+            WHERE
+                ccuc_ccmp_id = ".Yii::app()->sysCompany->getActiveCompany()."
+            ".$where."
             ORDER BY pprs_second_name,
               pprs_first_name 
         ";
-            
             $command = Yii::app()->db->createCommand($sql);
             
             return $command->queryAll();
