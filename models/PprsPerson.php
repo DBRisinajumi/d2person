@@ -203,7 +203,9 @@ class PprsPerson extends BasePprsPerson
                 pprs_second_name,
                 ' ',
                 pprs_first_name
-              ) full_name 
+              ) full_name,
+              pprs_second_name,
+              pprs_first_name 
             FROM
               AuthAssignment aa 
               INNER JOIN `profiles` p 
