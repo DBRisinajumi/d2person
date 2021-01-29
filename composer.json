@@ -3,7 +3,7 @@
     "description": "Person registry",
     "keywords": ["person","registry","yii","phundament"],
     "type": "yii-extension",
-    "license": "MIT License",
+    "license": "MIT-open-group",
     "authors": [
         {
             "name": "Uldis Nelsons",
